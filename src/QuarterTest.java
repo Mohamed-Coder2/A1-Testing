@@ -20,4 +20,37 @@ public class QuarterTest {
         assertEquals(quarterIndex, quarter.getQuarter());
         assertEquals(year, quarter.getYear());
     }
+    @Test
+    public void testNotify(){
+
+    } 
+    @Test
+    public void testNotifyAll(){
+        
+    }
+    @Test
+    public void testGetMilliSecond(){
+        
+    }
+
+    @Test
+    public void testGetSerialIndex(){
+        
+    }
+    @Test
+    public void testGetStart(){
+        
+    }
+    @Test
+    public void testGetYear(){
+        
+    }
+    @Test
+    public void testHashCode(){
+        
+    }
+    @Test
+    public void testNext(){
+        
+    }
 }
