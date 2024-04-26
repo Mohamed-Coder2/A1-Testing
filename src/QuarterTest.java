@@ -7,7 +7,6 @@ public class QuarterTest {
     public static void main(String[] args) throws Exception {
         System.out.println("Hello, World!");
     }
-    //
     @Test
     public void testConstructor() {
         // Arrange
