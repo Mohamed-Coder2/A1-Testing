@@ -1,6 +1,7 @@
 import static org.junit.Assert.assertEquals;
 
 import org.jfree.data.time.Quarter;
+import org.jfree.data.time.Year;
 import org.junit.Test;
 
 public class QuarterTest {
@@ -18,6 +19,19 @@ public class QuarterTest {
         assertEquals(year, quarter.getYear().getYear());
     }
     @Test
+    public void testConstructor2() {
+        // Arrange
+        int quarterIndex = 3;
+        Year year = new Year(2024);
+
+        // Act
+        Quarter quarter = new Quarter(quarterIndex, year);
+
+        // Assert
+        assertEquals(quarterIndex, quarter.getQuarter());
+        assertEquals(year, quarter.getYear());
+    }
+    @Test
     public void testNotify(){
         
     } 
@@ -29,7 +43,6 @@ public class QuarterTest {
     public void testGetMilliSecond(){
         
     }
-
     @Test
     public void testGetSerialIndex(){
         
