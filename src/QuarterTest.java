@@ -4,9 +4,6 @@ import org.jfree.data.time.Quarter;
 import org.junit.Test;
 
 public class QuarterTest {
-    public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
-    }
     @Test
     public void testConstructor() {
         // Arrange
@@ -18,7 +15,7 @@ public class QuarterTest {
 
         // Assert
         assertEquals(quarterIndex, quarter.getQuarter());
-        assertEquals(year, quarter.getYear());
+        assertEquals(year, quarter.getYear().getYear());
     }
     @Test
     public void testNotify(){
@@ -43,7 +40,9 @@ public class QuarterTest {
     }
     @Test
     public void testGetYear(){
+        Quarter quarter = new Quarter(0, 2024);
         
+        assertEquals(2024, quarter.getYear().getYear());
     }
     @Test
     public void testHashCode(){
