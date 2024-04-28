@@ -55,22 +55,6 @@ public class QuarterTest {
     }
     // Methods Test
     @Test
-    public void testCompareTo(){
-        // Arrange
-
-        // Act
-
-        // Assert
-    }
-    @Test
-    public void testEquals(){
-        // Arrange
-
-        // Act
-
-        // Assert
-    }
-    @Test
     public void testGetFirstMillisecond(){
         // Arrange
         long epochTimeMillis = 1704067200000L;
