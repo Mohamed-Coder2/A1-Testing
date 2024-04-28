@@ -54,35 +54,68 @@ public class QuarterTest {
     // Test Methods
     @Test
     public void testCompareTo(){
+        // Arrange
 
+        // Act
+
+        // Assert
     }
     @Test
     public void testEquals(){
+        // Arrange
 
+        // Act
+
+        // Assert
     }
     @Test
     public void testGetFirstMillisecond(){
+        // Arrange
+        Date date = new Date(1714306688938L);
+        Quarter quarter = new Quarter(date);
+        // Act
 
+        // Assert
     }
     @Test
     public void testGetFirstMillisecond(Calendar calendar){
+        // Arrange
 
+        // Act
+
+        // Assert
     }
     @Test
     public void testGetLastMillisecond(){
+        // Arrange
 
+        // Act
+
+        // Assert
     }
     @Test
     public void testGetLastMillisecond(Calendar calender){
-        
+        // Arrange
+
+        // Act
+
+        // Assert        
     }
     @Test
     public void testGetQuarter(){
+        // Arrange
 
+        // Act
+
+        // Assert
     }
     @Test
     public void testGetSerialIndex(){
+        // Arrange
 
+        // Act
+
+        // Assert
     }
     @Test
     public void testGetYear(){
@@ -98,26 +131,50 @@ public class QuarterTest {
     }
     @Test
     public void testHashCode(){
-        
+        // Arrange
+
+        // Act
+
+        // Assert        
     }
     @Test
     public void testNext(){
-        
+        // Arrange
+
+        // Act
+
+        // Assert        
     }
     @Test
     public void testParseQuarter(){
+        // Arrange
 
+        // Act
+
+        // Assert
     }
     @Test
     public void testPeg(){
+        // Arrange
 
+        // Act
+
+        // Assert
     }
     @Test
     public void testPrevious(){
+        // Arrange
 
+        // Act
+
+        // Assert
     }
     @Test
     public void testToString(){
-        
+        // Arrange
+
+        // Act
+
+        // Assert
     }
 }
