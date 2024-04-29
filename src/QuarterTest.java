@@ -10,6 +10,7 @@ import org.jfree.data.time.Year;
 import org.junit.Test;
 import java.util.Calendar;
 
+// 1900 - 9999
 public class QuarterTest {
     // Constructors Test
     @Test
@@ -17,25 +18,47 @@ public class QuarterTest {
         // Arrange
         // That long 1714306688938L is the milliseconds for 28/april/2024 since 1970 "epoch" so I Asserted with the year
         Date date = new Date(1714306688938L);
+        Year year = new Year(2024);
         
         // Act
         Quarter quarter = new Quarter(date);
         
         // Assert
-        assertEquals(2024, quarter.getYear().getYear());
+        assertEquals(year, quarter.getYear());
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructor2IntParamOutOfRange(){
+        // Arrange Act
+        Quarter quarter1 = new Quarter(4, 10000);
+        Quarter quarter2 = new Quarter(-1, 2024);
+        Quarter quarter3 = new Quarter(5, 2024);
+        Quarter quarter4 = new Quarter(2, 1700);
+
+        // Assert
+        assertEquals(10000, quarter1.getYear().getYear());
+        assertEquals(4, quarter1.getQuarter());
+    
+        assertEquals(2024, quarter2.getYear().getYear());
+        assertEquals(-1, quarter2.getQuarter());
+
+        assertEquals(2024, quarter3.getYear().getYear());
+        assertEquals(5, quarter3.getQuarter());
+
+        assertEquals(1700, quarter4.getYear().getYear());
+        assertEquals(2, quarter4.getQuarter());
     }
     @Test
     public void testConstructor2IntParam() {
         // Arrange
         int quarterIndex = 3;
-        int year = 2022;
+        Year year = new Year(2024);
 
         // Act
         Quarter quarter = new Quarter(quarterIndex, year);
 
         // Assert
         assertEquals(quarterIndex, quarter.getQuarter());
-        assertEquals(year, quarter.getYear().getYear());
+        assertEquals(year, quarter.getYear());
     }
     @Test
     public void testConstructorIntandYearParam() {
@@ -49,6 +72,32 @@ public class QuarterTest {
         // Assert
         assertEquals(quarterIndex, quarter.getQuarter());
         assertEquals(year, quarter.getYear());
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorIntandYearParamOutOfRange() {
+        // Arrange Act
+        Year year1 = new Year(10000);
+        Year year2 = new Year(2024);
+        Year year3 = new Year(1932);
+        Year year4 = new Year(1700);
+        
+        Quarter quarter1 = new Quarter(4, year1);
+        Quarter quarter2 = new Quarter(-1, year2);
+        Quarter quarter3 = new Quarter(5, year3);
+        Quarter quarter4 = new Quarter(2, year4);
+
+        // Assert
+        assertEquals(year1, quarter1.getYear().getYear());
+        assertEquals(4, quarter1.getQuarter());
+    
+        assertEquals(year2, quarter2.getYear().getYear());
+        assertEquals(-1, quarter2.getQuarter());
+
+        assertEquals(year3, quarter3.getYear().getYear());
+        assertEquals(5, quarter3.getQuarter());
+
+        assertEquals(year4, quarter4.getYear().getYear());
+        assertEquals(2, quarter4.getQuarter());
     }
     // Methods Test
     @Test
@@ -174,9 +223,8 @@ public class QuarterTest {
         Date date = new Date(1714306688938L);
         // Act
         Quarter quarter = new Quarter(date);
-        int x = quarter.getYear().getYear() * 4 + quarter.getQuarter();
         // Assert
-        assertEquals(x, quarter.getSerialIndex(), 0);
+        assertEquals(8098, quarter.getSerialIndex(), 0);
     }
     @Test
     public void testGetYear(){
@@ -197,7 +245,7 @@ public class QuarterTest {
         assertNotNull(quarter.hashCode());        
     }
     @Test
-    public void testHashCode2(){
+    public void testHashCodeNoRepitition(){
         // Arrange
         Date date1 = new Date(1714306688938L);
         Date date2 = new Date(1722187734000L);
@@ -219,14 +267,11 @@ public class QuarterTest {
         // Assert        
         assertEquals(time, quarter.next());
     }
-    @Test
-    public void testNext2(){
-        // Arrange
-        Date dateQ1 = new Date(1730225878000L); //Q4 2024
-        Date dateQ2 = new Date(1738178278000L); //Q1 2025
-        // Act
-        RegularTimePeriod time = new Quarter(dateQ2);
-        Quarter quarter = new Quarter(dateQ1);
+    @Test(expected = IllegalArgumentException.class)
+    public void testNextUpperBound(){
+        // Arrange Act
+        RegularTimePeriod time = new Quarter(1,10000);
+        Quarter quarter = new Quarter(4,9999);
         // Assert        
         // next of Q4 should be Q1 of next year
         assertEquals(time, quarter.next());
@@ -242,14 +287,11 @@ public class QuarterTest {
         // Assert        
         assertEquals(time, quarter.previous());
     }
-    @Test
-    public void testPrevious2(){
-        // Arrange
-        Date date1 = new Date(1738178278000L); // Q4 2024
-        Date date2 = new Date(1745950678000L); // Q1 2025
-        // Act
-        RegularTimePeriod time = new Quarter(date1);
-        Quarter quarter = new Quarter(date2);
+    @Test(expected = IllegalArgumentException.class)
+    public void testPreviousLowerBound(){
+        // Arrange Act
+        RegularTimePeriod time = new Quarter(4,1899);
+        Quarter quarter = new Quarter(1,1900);
         // Assert        
         assertEquals(time, quarter.previous());
     }
