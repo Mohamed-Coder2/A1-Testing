@@ -1,5 +1,6 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
 
 import java.sql.Date;
 
@@ -11,10 +12,6 @@ import java.util.Calendar;
 
 public class QuarterTest {
     // Constructors Test
-    @Test
-    public void testConstructorNoParam(){
-        //
-    }
     @Test
     public void testConstructorDateParam(){
         // Arrange
@@ -200,6 +197,18 @@ public class QuarterTest {
         assertNotNull(quarter.hashCode());        
     }
     @Test
+    public void testHashCode2(){
+        // Arrange
+        Date date1 = new Date(1714306688938L);
+        Date date2 = new Date(1722187734000L);
+        // Act
+        Quarter quarter1 = new Quarter(date1);
+        Quarter quarter2 = new Quarter(date2);
+        // Assert
+        // Making sure it's a different hash value
+        assertNotSame(quarter1.hashCode(), quarter2.hashCode());
+    }
+    @Test
     public void testNext(){
         // Arrange
         Date dateQ1 = new Date(1714306688938L);
@@ -211,13 +220,36 @@ public class QuarterTest {
         assertEquals(time, quarter.next());
     }
     @Test
+    public void testNext2(){
+        // Arrange
+        Date dateQ1 = new Date(1730225878000L); //Q4 2024
+        Date dateQ2 = new Date(1738178278000L); //Q1 2025
+        // Act
+        RegularTimePeriod time = new Quarter(dateQ2);
+        Quarter quarter = new Quarter(dateQ1);
+        // Assert        
+        // next of Q4 should be Q1 of next year
+        assertEquals(time, quarter.next());
+    }
+    @Test
     public void testPrevious(){
         // Arrange
-        Date dateQ1 = new Date(1714306688938L);
-        Date dateQ2 = new Date(1722187734000L);
+        Date dateQ1 = new Date(1714306688938L); // Q2 2024
+        Date dateQ2 = new Date(1722187734000L); // Q3 2024
         // Act
         RegularTimePeriod time = new Quarter(dateQ1);
         Quarter quarter = new Quarter(dateQ2);
+        // Assert        
+        assertEquals(time, quarter.previous());
+    }
+    @Test
+    public void testPrevious2(){
+        // Arrange
+        Date date1 = new Date(1738178278000L); // Q4 2024
+        Date date2 = new Date(1745950678000L); // Q1 2025
+        // Act
+        RegularTimePeriod time = new Quarter(date1);
+        Quarter quarter = new Quarter(date2);
         // Assert        
         assertEquals(time, quarter.previous());
     }
