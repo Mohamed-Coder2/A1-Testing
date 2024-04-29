@@ -26,36 +26,15 @@ public class QuarterTest {
         // Assert
         assertEquals(year, quarter.getYear());
     }
-    @Test(expected = IllegalArgumentException.class)
-    public void testConstructor2IntParamOutOfRange(){
-        // Arrange Act
-        Quarter quarter1 = new Quarter(4, 10000);
-        Quarter quarter2 = new Quarter(-1, 2024);
-        Quarter quarter3 = new Quarter(5, 2024);
-        Quarter quarter4 = new Quarter(2, 1700);
-
-        // Assert
-        assertEquals(10000, quarter1.getYear().getYear());
-        assertEquals(4, quarter1.getQuarter());
-    
-        assertEquals(2024, quarter2.getYear().getYear());
-        assertEquals(-1, quarter2.getQuarter());
-
-        assertEquals(2024, quarter3.getYear().getYear());
-        assertEquals(5, quarter3.getQuarter());
-
-        assertEquals(1700, quarter4.getYear().getYear());
-        assertEquals(2, quarter4.getQuarter());
-    }
     @Test
     public void testConstructor2IntParam() {
         // Arrange
         int quarterIndex = 3;
         Year year = new Year(2024);
-
+        
         // Act
         Quarter quarter = new Quarter(quarterIndex, year);
-
+        
         // Assert
         assertEquals(quarterIndex, quarter.getQuarter());
         assertEquals(year, quarter.getYear());
@@ -65,39 +44,50 @@ public class QuarterTest {
         // Arrange
         int quarterIndex = 3;
         Year year = new Year(2024);
-
+        
         // Act
         Quarter quarter = new Quarter(quarterIndex, year);
-
+        
         // Assert
         assertEquals(quarterIndex, quarter.getQuarter());
         assertEquals(year, quarter.getYear());
     }
     @Test(expected = IllegalArgumentException.class)
-    public void testConstructorIntandYearParamOutOfRange() {
+    public void testConstructor2IntParamYearMoreThanRange(){
+        Quarter quarter = new Quarter(4, 10000);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructor2IntParamYearLessThanRange(){
+        Quarter quarter = new Quarter(2, 1700);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructor2IntParamNegativeQuarter(){
+        Quarter quarter = new Quarter(-1, 2024);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructor2IntParamQuarterOutOfRange(){
+        Quarter quarter = new Quarter(5, 2024);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorIntandYearHigherThanRange() {
         // Arrange Act
-        Year year1 = new Year(10000);
-        Year year2 = new Year(2024);
-        Year year3 = new Year(1932);
-        Year year4 = new Year(1700);
-        
+        Year year1 = new Year(10000); 
         Quarter quarter1 = new Quarter(4, year1);
-        Quarter quarter2 = new Quarter(-1, year2);
-        Quarter quarter3 = new Quarter(5, year3);
-        Quarter quarter4 = new Quarter(2, year4);
-
-        // Assert
-        assertEquals(year1, quarter1.getYear().getYear());
-        assertEquals(4, quarter1.getQuarter());
-    
-        assertEquals(year2, quarter2.getYear().getYear());
-        assertEquals(-1, quarter2.getQuarter());
-
-        assertEquals(year3, quarter3.getYear().getYear());
-        assertEquals(5, quarter3.getQuarter());
-
-        assertEquals(year4, quarter4.getYear().getYear());
-        assertEquals(2, quarter4.getQuarter());
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorIntandYearLessThanRange() {
+        Year year4 = new Year(1700);
+        Quarter quarter = new Quarter(2, year4);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorNegativeQuarterAndYear() {
+        Year year4 = new Year(1900);
+        Quarter quarter = new Quarter(-4, year4);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorQuarterMoreThan4AndYear() {
+        Year year4 = new Year(1900);
+        Quarter quarter = new Quarter(6, year4);
     }
     // Methods Test
     @Test
